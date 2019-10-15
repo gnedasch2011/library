@@ -2,6 +2,14 @@
 $root = $_SERVER['DOCUMENT_ROOT'];
 const PATH_IMG = 'image/';
 
+
+/**
+ * Возвращает резанный файл
+ * @param $filename
+ * @param float $percent
+ * @param $folder
+ * @return string
+ */
 function getImgResize($filename, $percent = 0.1, $folder)
 {
     $path = 'image/';
@@ -28,13 +36,13 @@ function getImgResize($filename, $percent = 0.1, $folder)
     }
 }
 
-/**
- * вывод всех изображений, на в
- * @path
- */
-$path = ".";
-$filelist = array();
 
+/**
+ * вывод всех изображений в директории
+ * @param $pathWithFiles
+ * @param string $folderImg
+ * @return array
+ */
 function allPathImg($pathWithFiles, $folderImg = 'image/')
 {
     $dir = $folderImg . $pathWithFiles;
@@ -51,15 +59,23 @@ function allPathImg($pathWithFiles, $folderImg = 'image/')
     return $arrPathImg;
 }
 
+/**
+ * Возвращение ссылки
+ * @param $img
+ * @param $path
+ * @return string
+ */
 function getPathForLink($img, $path)
 {
     return PATH_IMG . $path .DIRECTORY_SEPARATOR. $img;
 }
 ?>
 
-<?php foreach (allPathImg('cert') as $img): ?>
-    <a href="<?= getPathForLink($img, 'cert'); ?>">
-        <img src="<?= getImgResize($img, .1, 'cert'); ?>" alt="">
+<?php
+$folder = 'cert2';
+foreach (allPathImg($folder) as $img): ?>
+    <a href="<?= getPathForLink($img, $folder); ?>">
+        <img src="<?= getImgResize($img, .1, $folder); ?>" alt="">
     </a>
 <?php endforeach; ?>
 
